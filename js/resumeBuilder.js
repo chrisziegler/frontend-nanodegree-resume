@@ -1,16 +1,13 @@
 
 
-
-
-
-
 var bio = {
 
   "name": "Chris Ziegler",
   "contacts": {
     "mobile": "206-321-0153",
     "e-mail": "chris.ziegler@gmail.com",
-    "github": "github.com/chrisziegler"
+    "github": "github.com/chrisziegler",
+    "location": "Pullman, WA"
   },
   "age": 49,
   "skills": ["awesomness", "programming", "design", "front-end development"],
@@ -18,25 +15,22 @@ var bio = {
 };
 
 
-
-
-
 // use both bracket and dot notation to add key/value pairs to object
 var education = {
 	"schools": [
     {
 		"name": "Washington State University",
-		"city": "Pullman, WA",
+		"location": "Pullman, WA",
     "majors": ["General Studies"],
     "minors": ["Business", "Fine Arts"],
 		"degree": "BA Humanities",
-		"year": 1992
+		"year": "1986 - 1992"
 	}, {
 		"name": "Washington State University",
-		"city": "Pullman, WA",
+		"location": "Pullman, WA",
     "majors": ["Environmental Science"],
 		"degree": "BS Earth and Environmental Science",
-		"year": 2014
+		"year": "2012 - 2014"
 	}
   ]
 };
@@ -112,8 +106,26 @@ var work = {
  ]
  };
 
- $("#main").append(internationalizeButton);
 
+var projects =
+ {
+ 	"projects": [{
+ 			"title": "Boeing: EELV",
+ 			"dates": "1999-2000",
+ 			"description": "Worked at the McConnel Douglas Plant in Hunnington Beach, California  \
+       on the design and code of this Intraweb application for Boeing's EELV rocket project",
+ 			"images": ["images/boeing.jpg"]
+ 		}, {
+ 			"title": "Eyes to the World",
+ 			"dates": "2001",
+ 			"description": "Proof of concept, and design comps for this Seattle-based startup",
+ 			"images": ["images/eyes.JPG", "images/eyes2.jpg"]
+ 		}
+ 	]
+ };
+
+
+// Another string function to format international version of name
  function inName(name)  {
     name = name.trim().split(" "); // The trim() method removes whitespace from both sides of a string.
     console.log(name);
@@ -126,7 +138,37 @@ var work = {
 
  };
 
- console.log(inName(" JoE DiMaggiO"));
+ // console.log(inName(" JoE DiMaggiO"));
+
+$("#main").append(internationalizeButton);
+
+//Display google map in the 'Where i've lived and worked' section
+$("#mapDiv").append(googleMap);
+
+
+// add a projects section - showing that objects can encapsulate (hold inside) Functions
+(projects.display = function()  { // creates a display method to the projects object
+
+  for(project in projects.projects)  {
+    $('#projects').append(HTMLprojectStart);
+    var formattedTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].title);
+    $('.project-entry:last').append(formattedTitle);
+    var formattedDates = HTMLprojectDates.replace('%data%', projects.projects[project].dates);
+    $('.project-entry:last').append(formattedDates);
+    var formattedDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
+    $('.project-entry:last').append(formattedDescription);
+
+    if(projects.projects[project].images.length > 0) {
+      for(image in projects.projects[project].images) {
+        var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
+        $('.project-entry:last').append(formattedImage);
+      }
+    }
+
+  }
+
+})();
+
 
 
 
@@ -164,7 +206,8 @@ function locationizer(work_obj)  {
 
 };
 
-console.log(locationizer(work));
+// console.log(locationizer(work));
+
 
 // while loop, final } (right bracket) after lower comment block)
 if(bio.skills.length > 0)  {
@@ -204,24 +247,24 @@ function displayWork()  {
 displayWork();
 
 
+function displaySchool()  {
+  for(school in education.schools)  {
+    $("#education").append(HTMLschoolStart);
+    var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
+    var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
+    var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].majors);
+    var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[school].degree);
+    var formattedYear = HTMLschoolDates.replace('%data%', education.schools[school].year);
+
+    $(".education-entry:last").append(formattedName);
+    $(".education-entry:last").append(formattedLocation);
+    $(".education-entry:last").append(formattedMajor);
+    $(".education-entry:last").append(formattedDegree);
+    $(".education-entry:last").append(formattedYear);
 
 
+// add in if .enght > 0 statement   var formattedMinor = (also add HTMLschoolMinor is helper.js)
 
-/* same thing with a for loop
-if(bio.skills.length > 0)  {
-  $("#header").append(HTMLskillsStart);
-  var skillsLength = bio.skills.length;
-    for(var i = 0; i < skillsLength; i++)  {
-      var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-      $("#skills").append(formattedSkill);
-    }
-    END IF LOOP */
-
-/*  old list before adding a loop to add skills array
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
-  $("#skills").append(formattedSkill);
-} */
+  }
+}
+displaySchool();

@@ -24,6 +24,11 @@ h6 {
   padding: 0 5%;
 }
 
+.project-sm  {
+  width: 300px;
+  display: inline;
+}
+
 h1 {
   font-size: 40px;
   color: #f5a623;
@@ -74,6 +79,14 @@ h5 {
   line-height: 16px;
   float: left;
 }
+.school-text {
+  font-style: bold;
+  font-size: 16px;
+  color: #990000;
+  line-height: 16px;
+  float: left;
+}
+
 
 .location-text {
   font-style: italic;

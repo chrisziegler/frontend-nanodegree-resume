@@ -40,14 +40,22 @@ var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+var HTMLprojectImage = '<img class="project-sm" src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
+var HTMLschoolName = '<br><div class="school-text">%data%</div>';
+var HTMLschoolDegree = '<p>%data%</p>';
+var HTMLschoolDates = '<div class="date-text">%data%</div><br>';
+var HTMLschoolLocation = '<div class="location-text">%data%</div>';
+var HTMLschoolMajor = '<br><p><em>Major:</em> %data%</p>';
+
+/* preformatted versionvar HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%';
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
 var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+*/
 
 var HTMLonlineClasses = '<h3>Online Classes</h3>';
 var HTMLonlineTitle = '<a href="#">%data%';
@@ -71,7 +79,7 @@ $(document).ready(function() {
 
 /*
 The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
-*/
+
 clickLocations = [];
 
 function logClicks(x,y) {
@@ -84,11 +92,12 @@ function logClicks(x,y) {
   console.log('x location: ' + x + '; y location: ' + y);
 }
 
-$(document).click(function(loc) {
-  // your code goes here!
+$(document).click(function(loc)  {
+  var x = loc.pageX;
+  var y = loc.pageY;
+  logClicks(x,y);
 });
-
-
+*/
 
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
@@ -114,6 +123,19 @@ function initializeMap() {
   appended to #mapDiv in resumeBuilder.js.
   */
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   /*
@@ -238,11 +260,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+map.fitBounds(mapBounds);
+});
